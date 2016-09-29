@@ -44,8 +44,9 @@ Some useful GAS functions and docs:
 https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet
 
 var range = sheet.getRangeByName(rangeName);
-var data = range.getValues(data);
-var data = range.setValues(data);
+var cell = sheet.getRange("A1"); // supports A1 or R1C1 notation
+var data = range.getValues();
+range.setValues(data);
 sheet.setNamedRange("TaxRates", SpreadsheetApp.getActiveRange());
 
 // The code below will log the name of the second sheet in a spreadsheet.

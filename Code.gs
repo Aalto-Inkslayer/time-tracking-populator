@@ -24,13 +24,18 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 var inputsheet = SpreadsheetApp.openById("1RIXNqelgvNWrEywzemM3oF-kBMiMphJjXiYECRAw6Cs");
-
+var names = ["Esa", "Alpi", "Anton", "Jani", "Kasper", "Tuomo"];
 
 // SHOULD ONLY BE RAN ONCE, WHEN READY. OTHERWISE YOU RISK LOSING DATA. //
-function runSheetFullPopulator() {
-  insertNamedRangesToTotals(getTotalsRange(inputsheet));
-  addWeekHeadersToIndividualSheets(getWeekHeaderData(inputsheet));
-  addNamedRangesToIndividualSheets(getWeekHeaderData(inputsheet));
+function run() {
+  populateSheet();
+}
+
+
+function populateSheet() {
+  insertNamedRangesToTotals(getTotalsRange(inputsheet), names);
+  addWeekHeadersToIndividualSheets(getWeekHeaderData(inputsheet), 13);
+  addNamedRangesToIndividualSheets(getWeekHeaderData(inputsheet), 13, names);
 }
 
 
@@ -57,22 +62,23 @@ function getTotalsRange(sheet) {
 }
 
 // Returns the starting points of weeks in the data as an Array[][].
-// The first index is the
+// The first index is the sheet's index, the second a list of integers denoting the rows of week headers.
 function getWeekHeaderData(sheet) {
 
 }
 
-
-function insertNamedRangesToTotals(totalsRange) {
-
-}
-
-
-function addWeekHeadersToIndividualSheets(weekHeaderData) {
+// Creates and inserts named ranges to the totals sheet.
+// Format for named ranges is "nameweekX"; with the person's name, a "week" string, and the week number.
+function insertNamedRangesToTotals(totalsRange, names) {
 
 }
 
+// Inserts week headers to sheets where they are missing. Leaves some empty space between weeks.
+function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
 
-function addNamedRangesToIndividualSheets(weekHeaderData) {
+}
+
+// Only if the necessary amount of weeks' headers exist, create named ranges appropriately.
+function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
 
 }

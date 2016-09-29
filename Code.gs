@@ -40,7 +40,8 @@ function populateSheet() {
 
 
 /*
-Some useful GAS functions:
+Some useful GAS functions and docs:
+https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet
 
 var range = sheet.getRangeByName(rangeName);
 var data = range.getValues(data);

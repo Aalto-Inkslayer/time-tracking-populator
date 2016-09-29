@@ -5,9 +5,10 @@
  * spreadsheet with various values and ranges necessary for gathering data.  *
  *                                                                           *
  * @author: Esa "mmKALLL" Koskinen                                           *
+ * @source: https://github.com/Aalto-Inkslayer/time-tracking-populator       *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * This program is free software: you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
  * the Free Software Foundation, either version 3 of the License, or         *
@@ -41,13 +42,22 @@ var data = range.getValues(data);
 var data = range.setValues(data);
 sheet.setNamedRange("TaxRates", SpreadsheetApp.getActiveRange());
 
+// The code below will log the name of the second sheet in a spreadsheet.
+var sheets = sheet.getSheets();
+if (sheets.length > 1) {
+  Logger.log(sheets[1].getName());
+}
+
 */
 
+// Returns the data area in the totals sheet as an Object[][].
+// Includes the week numbers and names, as well as totals.
 function getTotalsRange(sheet) {
 
 }
 
-
+// Returns the starting points of weeks in the data as an Array[][].
+// The first index is the
 function getWeekHeaderData(sheet) {
 
 }

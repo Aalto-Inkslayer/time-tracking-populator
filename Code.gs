@@ -72,7 +72,7 @@ function getWeekHeaderData(sheet, names) {
   var i;
   for (i = individualSheetOffset; i < sheets.length; i += 1) {
     if (sheets[i].getName() == names[i - individualSheetOffset]) {
-      result.push(sheets[i].getRange("B1:B900").getDisplayValues());
+      result.push(sheets[i].getRange("B1:B900").getValues());
     }
   }
   return result;
@@ -93,14 +93,17 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
         weeksFound += 1;
         lowestWeek = j;
       }
+      if (data[i][j][0].toString() !== "") {
+        lowestWeek = j;
+      }
     }
 
     var k;
     for (k = weeksFound + 1; k <= weekAmount; k += 1) {
       var position = lowestWeek + (k - weeksFound) * 10;
       data[i][position] = "Week " + k.toString();
-      var cell = sheet.getSheets()[individualSheetOffset]
-                      .getRange("B" + String(position));
+      var cell = sheet.getSheets()[i + individualSheetOffset]
+                      .getRange("B" + String(position + 1));
 
       cell.setFontWeight("bold");
       cell.setHorizontalAlignment("left");

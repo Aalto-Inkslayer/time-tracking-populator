@@ -33,9 +33,9 @@ function run() {
 
 
 function populateSheet() {
-  insertNamedRangesToTotals(getTotalsRange(inputsheet), names);
   addWeekHeadersToIndividualSheets(getWeekHeaderData(inputsheet), 13);
   addNamedRangesToIndividualSheets(getWeekHeaderData(inputsheet), 13, names);
+  insertNamedRangesToTotals(getTotalsRange(inputsheet), names);
 }
 
 
@@ -60,12 +60,15 @@ if (sheets.length > 1) {
 // Returns the data area in the totals sheet as an Object[][].
 // Includes the week numbers and names, as well as totals.
 function getTotalsRange(sheet) {
-
+  return sheet.getRangeByName("totalstable").getValues();
 }
 
 // Returns the starting points of weeks in the data as an Array[][].
 // The first index is the sheet's index, the second a list of integers denoting the rows of week headers.
 function getWeekHeaderData(sheet) {
+  var sheets = sheet.getSheets();
+  
+
 
 }
 

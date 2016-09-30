@@ -101,12 +101,12 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
     var k;
     for (k = weeksFound + 1; k <= weekAmount; k += 1) {
       var position = lowestWeek + (k - weeksFound) * 10;
-      data[i][position] = "Week " + k.toString();
       var cell = inputsheet.getSheets()[i + individualSheetOffset]
                       .getRange("B" + String(position + 1));
 
       cell.setFontWeight("bold");
       cell.setHorizontalAlignment("left");
+      cell.setValue("Week " + k.toString());
     }
   }
 }
@@ -114,7 +114,7 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
 // Only if the necessary amount of weeks' headers exist, create named ranges appropriately.
 function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
   var data = weekHeaderData;
-
+  
 }
 
 // Creates and inserts named ranges to the totals sheet.

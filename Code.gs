@@ -25,6 +25,7 @@
 
 var inputsheet = SpreadsheetApp.openById("1RIXNqelgvNWrEywzemM3oF-kBMiMphJjXiYECRAw6Cs");
 var namelist = ["Esa", "Alpi", "Anton", "Jani", "Kasper", "Tuomo"];
+var individualSheetOffset = 2;
 
 // SHOULD ONLY BE RAN ONCE, WHEN READY. OTHERWISE YOU RISK LOSING DATA. //
 function run() {
@@ -69,7 +70,7 @@ function getWeekHeaderData(sheet, names) {
   var result = [];
   var sheets = sheet.getSheets();
   var i;
-  for (i = 2; i < sheets.length; i += 1) {
+  for (i = individualSheetOffset; i < sheets.length; i += 1) {
     if (sheets[i].getName() == names[i - 1]) {
       result.push(sheets[i].getRange("B1:B900").getValues());
     }
@@ -97,7 +98,7 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
     for (k = weeksFound + 1; k <= weekAmount; k += 1) {
       var position = lowestWeek + (k - weeksFound) * 10;
       data[i][position] = "Week " + k.toString();
-      var cell = sheet.getSheets()[i + 1]
+      var cell = sheet.getSheets()[individualSheetOffset]
                       .getRange("B" + String(position));
 
       cell.setFontWeight("bold");

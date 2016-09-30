@@ -34,7 +34,7 @@ function run() {
 
 
 function populateSheet() {
-  addWeekHeadersToIndividualSheets(getWeekHeaderData(inputsheet), 13);
+  addWeekHeadersToIndividualSheets(getWeekHeaderData(inputsheet, namelist), 13);
   addNamedRangesToIndividualSheets(getWeekHeaderData(inputsheet, namelist), 13, namelist);
   insertNamedRangesToTotals(getTotalsRange(inputsheet), namelist);
 }

@@ -150,7 +150,7 @@ function insertNamedRangesToTotals(totalsRange, names) {
   for (i = 0; i < data.length; i += 1) {
     var j;
     for (j = 0; j < data[i].length; j += 1) {
-      data[i][j] = "=SUM(" + names[j] + "week" + i + ")"
+      data[i][j] = "=SUM(" + names[j] + "week" + (i + 1) + ")"
     }
   }
 

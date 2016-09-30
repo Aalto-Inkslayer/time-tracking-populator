@@ -64,14 +64,14 @@ function getTotalsRange(sheet) {
 }
 
 // Returns the starting points of weeks in the data as an Array[][].
-// The first index is the sheet's index (Totals is 0), the second indicates data value position between B2:B900.
+// The first index is the sheet's index (Totals is 0), the second indicates data value position between B1:B900.
 function getWeekHeaderData(sheet, names) {
   var result = [][];
   var sheets = sheet.getSheets();
   var i;
   for (i = 1; i < sheets.length; i += 1) {
     if (sheets[i].getName() == names[i - 1]) {
-      var data = sheets[i].getRange("B2:B900").getValues();
+      var data = sheets[i].getRange("B1:B900").getValues();
       var j;
       for (j = 0; j < data.length; j += 1) {
         result[i][j] = data[j][0];
@@ -81,18 +81,37 @@ function getWeekHeaderData(sheet, names) {
   return result;
 }
 
-// Creates and inserts named ranges to the totals sheet.
-// Format for named ranges is "nameweekX"; with the person's name, a "week" string, and the week number.
-function insertNamedRangesToTotals(totalsRange, names) {
-
-}
-
 // Inserts week headers to sheets where they are missing. Leaves some empty space between weeks.
-function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
+function addWeekHeadersToIndividualSheet(weekHeaderData, weekAmount) {
+  var data = weekHeaderData;
+  var i;
+  for (i = 0; i < data.length; i += 1) {
+    var weeksFound = 0;
+    var lowestWeek = 0;
 
+    var j;
+    for (j = 0; j < data[i].length; j += 1) {
+      if (data[i][j].toString().toLowerCase().startsWith("week")) {
+        weeksFound += 1;
+        lowestWeek = j;
+      }
+    }
+
+    var k;
+    for (k = weeksFound + 1; k <= weekAmount; k += 1) {
+      var cell =
+    }
+  }
 }
 
 // Only if the necessary amount of weeks' headers exist, create named ranges appropriately.
 function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
+  var data = weekHeaderData;
+
+}
+
+// Creates and inserts named ranges to the totals sheet.
+// Format for named ranges is "nameweekX"; with the person's name, a "week" string, and the week number.
+function insertNamedRangesToTotals(totalsRange, names) {
 
 }

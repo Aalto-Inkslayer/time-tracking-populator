@@ -129,7 +129,7 @@ function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
       if (celldata.lastIndexOf("week", 0) === 0) {
         // Set the named range
         inputsheet.setNamedRange(names[i].toLowerCase() + "week" + currentWeek,
-                inputsheet.getSheets()[i + individualSheetOffset].getRange("B" + lastRow + ":B" + j));
+                inputsheet.getSheets()[i + individualSheetOffset].getRange("D" + lastRow + ":D" + j));
         lastRow = j + 1;
         currentWeek += 1;
       }

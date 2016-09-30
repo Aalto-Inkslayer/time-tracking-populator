@@ -112,13 +112,31 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
 }
 
 // Only if the necessary amount of weeks' headers exist, create named ranges appropriately.
+// Format for named ranges is "nameweekX"; with the person's name, a "week" string, and the week number.
 function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
   var data = weekHeaderData;
-  
+  var i;
+  for (i = 0; i < data.length; i += 1) {
+    var currentWeek = 1;
+    var lastRow = 3;
+
+    // Go through the weeks; starts from row 6 to skip the first week.
+    var j;
+    for (j = 5; j < data[i].length; j += 1) {
+      var celldata = data[i][j][0].toString().toLowerCase();
+
+      // Check if the cell's data starts with the string "week"
+      if (celldata.lastIndexOf("week", 0) === 0) {
+        // Set the named range
+        inputsheet.setNamedRange(names[i].toLowerCase() + "week" + currentWeek,
+                inputsheet.getSheets()[i + individualSheetOffset].getRange("B" + lastrow + ":B" + j));
+        lastRow = j + 1;
+      }
+    }
+  }
 }
 
-// Creates and inserts named ranges to the totals sheet.
-// Format for named ranges is "nameweekX"; with the person's name, a "week" string, and the week number.
+// Inserts named ranges to the totals sheet.
 function insertNamedRangesToTotals(totalsRange, names) {
 
 }

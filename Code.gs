@@ -66,23 +66,19 @@ function getTotalsRange(sheet) {
 // Returns the starting points of weeks in the data as an Array[][].
 // The first index is the sheet's index (Totals is 0), the second indicates data value position between B1:B900.
 function getWeekHeaderData(sheet, names) {
-  var result = [][];
+  var result = [];
   var sheets = sheet.getSheets();
   var i;
   for (i = 1; i < sheets.length; i += 1) {
     if (sheets[i].getName() == names[i - 1]) {
-      var data = sheets[i].getRange("B1:B900").getValues();
-      var j;
-      for (j = 0; j < data.length; j += 1) {
-        result[i][j] = data[j][0];
-      }
+      result.push(sheets[i].getRange("B1:B900").getValues());
     }
   }
   return result;
 }
 
 // Inserts week headers to sheets where they are missing. Leaves some empty space between weeks.
-function addWeekHeadersToIndividualSheet(weekHeaderData, weekAmount) {
+function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
   var data = weekHeaderData;
   var i;
   for (i = 0; i < data.length; i += 1) {
@@ -91,7 +87,7 @@ function addWeekHeadersToIndividualSheet(weekHeaderData, weekAmount) {
 
     var j;
     for (j = 0; j < data[i].length; j += 1) {
-      if (data[i][j].toString().toLowerCase().startsWith("week")) {
+      if (data[i][j][0].toString().toLowerCase().startsWith("week")) {
         weeksFound += 1;
         lowestWeek = j;
       }
@@ -99,7 +95,13 @@ function addWeekHeadersToIndividualSheet(weekHeaderData, weekAmount) {
 
     var k;
     for (k = weeksFound + 1; k <= weekAmount; k += 1) {
-      var cell =
+      var position = lowestWeek + (k - weeksFound) * 10;
+      data[i][position] = "Week " + k.toString();
+      var cell = sheet.getSheets()[i + 1]
+                      .getRange("B" + String(position));
+
+      cell.setFontWeight("bold");
+      cell.setHorizontalAlignment("left");
     }
   }
 }

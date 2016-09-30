@@ -58,11 +58,6 @@ if (sheets.length > 1) {
 
 */
 
-// Returns the data area in the totals sheet as an Object[][].
-// Includes the week numbers and names, as well as totals.
-function getTotalsRange(sheet) {
-  return sheet.getRangeByName("totalstable").getValues();
-}
 
 // Returns the starting points of weeks in the data as an Array[][].
 // The first index is the sheet's index (Totals is 0), the second indicates data value position between B1:B900.
@@ -140,7 +135,29 @@ function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
   }
 }
 
+
+// Returns the data area in the totals sheet as an Object[][].
+// Includes the week numbers and names, as well as totals.
+function getTotalsRange(sheet) {
+  return sheet.getRangeByName("totalstable");
+}
+
+
 // Inserts named ranges to the totals sheet.
 function insertNamedRangesToTotals(totalsRange, names) {
+  data = totalsRange.getValues();
+  var i;
+  for (i = 0; i < data.length; i += 1) {
+    var j;
+    for (j = 0; j < data[i].length; j += 1) {
+      data[i][j] = "=SUM(" + names[j] + "week" + i + ")"
+    }
+  }
 
+  totalsRange.setValues(data);
 }
+
+
+
+
+// EOF

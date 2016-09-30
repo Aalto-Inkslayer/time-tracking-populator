@@ -24,7 +24,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 var inputsheet = SpreadsheetApp.openById("1RIXNqelgvNWrEywzemM3oF-kBMiMphJjXiYECRAw6Cs");
-var names = ["Esa", "Alpi", "Anton", "Jani", "Kasper", "Tuomo"];
+var namelist = ["Esa", "Alpi", "Anton", "Jani", "Kasper", "Tuomo"];
 
 // SHOULD ONLY BE RAN ONCE, WHEN READY. OTHERWISE YOU RISK LOSING DATA. //
 function run() {
@@ -34,8 +34,8 @@ function run() {
 
 function populateSheet() {
   addWeekHeadersToIndividualSheets(getWeekHeaderData(inputsheet), 13);
-  addNamedRangesToIndividualSheets(getWeekHeaderData(inputsheet), 13, names);
-  insertNamedRangesToTotals(getTotalsRange(inputsheet), names);
+  addNamedRangesToIndividualSheets(getWeekHeaderData(inputsheet, namelist), 13, namelist);
+  insertNamedRangesToTotals(getTotalsRange(inputsheet), namelist);
 }
 
 
@@ -64,12 +64,21 @@ function getTotalsRange(sheet) {
 }
 
 // Returns the starting points of weeks in the data as an Array[][].
-// The first index is the sheet's index, the second a list of integers denoting the rows of week headers.
-function getWeekHeaderData(sheet) {
+// The first index is the sheet's index (Totals is 0), the second indicates data value position between B2:B900.
+function getWeekHeaderData(sheet, names) {
+  var result = [][];
   var sheets = sheet.getSheets();
-  
-
-
+  var i;
+  for (i = 1; i < sheets.length; i += 1) {
+    if (sheets[i].getName() == names[i - 1]) {
+      var data = sheets[i].getRange("B2:B900").getValues();
+      var j;
+      for (j = 0; j < data.length; j += 1) {
+        result[i][j] = data[j][0];
+      }
+    }
+  }
+  return result;
 }
 
 // Creates and inserts named ranges to the totals sheet.

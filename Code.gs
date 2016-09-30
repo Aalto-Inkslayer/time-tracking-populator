@@ -134,6 +134,9 @@ function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
         currentWeek += 1;
       }
     }
+    // Add named range for the last week, which has no week after it.
+    inputsheet.setNamedRange(names[i].toLowerCase() + "week" + currentWeek,
+            inputsheet.getSheets()[i + individualSheetOffset].getRange("D" + lastRow + ":D" + (lastRow + 20)));
   }
 }
 

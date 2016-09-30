@@ -71,7 +71,7 @@ function getWeekHeaderData(sheet, names) {
   var sheets = sheet.getSheets();
   var i;
   for (i = individualSheetOffset; i < sheets.length; i += 1) {
-    if (sheets[i].getName() == names[i - 1]) {
+    if (sheets[i].getName() == names[i - individualSheetOffset]) {
       result.push(sheets[i].getRange("B1:B900").getValues());
     }
   }

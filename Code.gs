@@ -102,7 +102,7 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
     for (k = weeksFound + 1; k <= weekAmount; k += 1) {
       var position = lowestWeek + (k - weeksFound) * 10;
       data[i][position] = "Week " + k.toString();
-      var cell = sheet.getSheets()[i + individualSheetOffset]
+      var cell = inputsheet.getSheets()[i + individualSheetOffset]
                       .getRange("B" + String(position + 1));
 
       cell.setFontWeight("bold");

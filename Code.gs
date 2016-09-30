@@ -88,7 +88,8 @@ function addWeekHeadersToIndividualSheets(weekHeaderData, weekAmount) {
 
     var j;
     for (j = 0; j < data[i].length; j += 1) {
-      if (data[i][j][0].toString().toLowerCase().startsWith("week")) {
+      // Check if the cell's data starts with the string "week"
+      if (data[i][j][0].toString().toLowerCase().lastIndexOf("week", 0) === 0) {
         weeksFound += 1;
         lowestWeek = j;
       }

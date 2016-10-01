@@ -138,7 +138,7 @@ function addNamedRangesToIndividualSheets(weekHeaderData, weekAmount, names) {
 
 
 // Returns the data area in the totals sheet as an Object[][].
-// Includes the week numbers and names, as well as totals.
+// Excludes the week numbers and names, as well as totals.
 function getTotalsRange(sheet) {
   return sheet.getRangeByName("totalstable");
 }
